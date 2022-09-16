@@ -12,9 +12,9 @@ public class UnrealTournament99 : SimpleTCPPack
 
     public UnrealTournament99(IPlayer player, Func<CrowdControlBlock, bool> responseHandler, Action<object> statusUpdateHandler) : base(player, responseHandler, statusUpdateHandler) { }
 
-    public override Game Game { get; } = new Game(131, "Unreal Tournament 99", "UnrealTournament99", "PC", ConnectorType.SimpleTCPConnector);
+    public override Game Game { get; } = new(131, "Unreal Tournament 99", "UnrealTournament99", "PC", ConnectorType.SimpleTCPConnector);
 
-    public override List<Effect> Effects => new List<Effect>
+    public override List<Effect> Effects => new()
     {
         //General Effects
         new Effect("Go Third-Person", "third_person"),
@@ -91,7 +91,7 @@ public class UnrealTournament99 : SimpleTCPPack
     };
 
     //Slider ranges need to be defined
-    public override List<ItemType> ItemTypes => new List<ItemType>(new[]
+    public override List<ItemType> ItemTypes => new(new[]
     {
         new ItemType("Amount","amount10",ItemType.Subtype.Slider, "{\"min\":1,\"max\":10}"),
         new ItemType("Amount","amount200",ItemType.Subtype.Slider, "{\"min\":1,\"max\":200}"),
