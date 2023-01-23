@@ -14,7 +14,7 @@ public class UnrealTournament99 : SimpleTCPPack
 
     public override Game Game { get; } = new(131, "Unreal Tournament 99", "UnrealTournament99", "PC", ConnectorType.SimpleTCPConnector);
 
-    public override List<Effect> Effects => new()
+    public override List<Effect> Effects { get; } = new()
     {
         //General Effects
         new Effect("Go Third-Person", "third_person"),
