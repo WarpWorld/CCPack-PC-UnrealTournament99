@@ -14,6 +14,32 @@ public class UnrealTournament99 : SimpleTCPPack
 
     public override Game Game { get; } = new(131, "Unreal Tournament 99", "UnrealTournament99", "PC", ConnectorType.SimpleTCPConnector);
 
+    //Weapon list
+    private static readonly ParameterDef weaponList = new("Weapons", "weapons",
+        new Parameter("Translocator", "translocator"),
+        new Parameter("Ripper", "ripper"),
+        new Parameter("BioRifle", "biorifle"),
+        new Parameter("Flak Cannon", "flakcannon"),
+        new Parameter("Sniper Rifle", "sniperrifle"),
+        new Parameter("Shock Rifle", "shockrifle"),
+        new Parameter("Pulse Rifle", "pulsegun"),
+        new Parameter("Minigun", "minigun"),
+        new Parameter("Rocket Launcher", "rocketlauncher")
+    );
+
+    //Ammo List
+    private static readonly ParameterDef ammoList = new("Ammo", "ammo",
+        new Parameter("Flak Ammo", "flakammo"),
+        new Parameter("BioRifle Goo", "bioammo"),
+        new Parameter("Redeemer Missile", "warheadammo"),
+        new Parameter("Pulse Rifle Ammo", "pammo"),
+        new Parameter("Shock Rifle Core", "shockcore"),
+        new Parameter("Ripper Blades", "bladehopper"),
+        new Parameter("Rockets", "rocketpack"),
+        new Parameter("Sniper Ammo", "bulletbox"),
+        new Parameter("Minigun/Enforcer Ammo", "miniammo")
+    );
+
     public override EffectList Effects { get; } = new Effect[]
     {
         //General Effects
@@ -33,69 +59,47 @@ public class UnrealTournament99 : SimpleTCPPack
         
         ////////////////////////////////////////////////////////////////
         
-        new Effect("Health and Armor","health",ItemKind.Folder),
-        new Effect("Full Heal", "full_heal","health"),
-        new Effect("Shield Belts for All", "full_armour","health"),
-        new Effect("Give Health", "give_health",new[]{"amount200"},"health"),
-        new Effect("Sudden Death", "sudden_death","health"),
-        new Effect("Thanos Snap", "thanos","health"),
-        new Effect("Vampiric Attacks", "vampire_mode","health"),
-        new Effect("Give Shield Belt to Last Place", "last_place_shield","health"),
-        new Effect("Blue (Redeemer) Shell", "blue_redeemer_shell","health"),
+        //new Effect("Health and Armor","health",ItemKind.Folder),
+        new Effect("Full Heal", "full_heal") { Category = "Health & Ammo" },
+        new Effect("Shield Belts for All", "full_armour") { Category = "Health & Ammo" },
+        new Effect("Give Health", "give_health")
+        {
+            Quantity = 200,
+            Category = "Health & Ammo"
+        },
+        new Effect("Sudden Death", "sudden_death") { Category = "Health & Ammo" },
+        new Effect("Thanos Snap", "thanos") { Category = "Health & Ammo" },
+        new Effect("Vampiric Attacks", "vampire_mode") { Category = "Health & Ammo" },
+        new Effect("Give Shield Belt to Last Place", "last_place_shield") { Category = "Health & Ammo" },
+        new Effect("Blue (Redeemer) Shell", "blue_redeemer_shell") { Category = "Health & Ammo" },
         
         /////////////////////////////////////////////////////////////////
         
-        new Effect("Weapons and Damage","weapons",ItemKind.Folder),
-        new Effect("Give Weapon to All", "give_weapon",new[]{"weaponlist"},"weapons"), //Needs to use a weapons list
-        new Effect("Give Instagib Rifles to All", "give_instagib","weapons"),
-        new Effect("Give Redeemers to All", "give_redeemer","weapons"),
-        new Effect("Force Everybody to Use Weapon", "force_weapon_use",new[]{"weaponlist"},"weapons"), //Needs to use a weapons list
-        new Effect("Force All Players to use Instagib Rifle", "force_instagib","weapons"),
-        new Effect("Force All Players to use Redeemers", "force_redeemer","weapons"),
-        new Effect("Give Ammo", "give_ammo",new[]{"ammolist","amount10"},"weapons"),
-        new Effect("Remove All Ammo", "no_ammo","weapons"),
-        new Effect("Bonus Damage for All", "bonus_dmg","weapons"),
-        new Effect("Melee Only! (60 seconds)", "melee_only","weapons"),
-        new Effect("Bonus Damage for Last Place", "last_place_bonus_dmg","weapons"),
-        new Effect("All Players Drop Current Weapon", "drop_selected_item","weapons"),
-        
-        
-        
-        ////////////////////////////////////////////////////////////////////////////////////////
-        
-        
-        
-        
-        //Weapon list
-        new Effect("Translocator","translocator",ItemKind.Usable,"weaponlist"),
-        new Effect("Ripper","ripper",ItemKind.Usable,"weaponlist"),
-        new Effect("BioRifle","biorifle",ItemKind.Usable,"weaponlist"),
-        new Effect("Flak Cannon","flakcannon",ItemKind.Usable,"weaponlist"),
-        new Effect("Sniper Rifle","sniperrifle",ItemKind.Usable,"weaponlist"),
-        new Effect("Shock Rifle","shockrifle",ItemKind.Usable,"weaponlist"),
-        new Effect("Pulse Rifle","pulsegun",ItemKind.Usable,"weaponlist"),
-        new Effect("Minigun","minigun",ItemKind.Usable,"weaponlist"),
-        new Effect("Rocket Launcher","rocketlauncher",ItemKind.Usable,"weaponlist"),
-
-        //Ammo List
-        new Effect("Flak Ammo","flakammo",ItemKind.Usable,"ammolist"),
-        new Effect("BioRifle Goo","bioammo",ItemKind.Usable,"ammolist"),
-        new Effect("Redeemer Missile","warheadammo",ItemKind.Usable,"ammolist"),
-        new Effect("Pulse Rifle Ammo","pammo",ItemKind.Usable,"ammolist"),
-        new Effect("Shock Rifle Core","shockcore",ItemKind.Usable,"ammolist"),
-        new Effect("Ripper Blades","bladehopper",ItemKind.Usable,"ammolist"),
-        new Effect("Rockets","rocketpack",ItemKind.Usable,"ammolist"),
-        new Effect("Sniper Ammo","bulletbox",ItemKind.Usable,"ammolist"),
-        new Effect("Minigun/Enforcer Ammo","miniammo",ItemKind.Usable,"ammolist"),
-
+        //new Effect("Weapons and Damage","weapons",ItemKind.Folder),
+        new Effect("Give Weapon to All", "give_weapon")
+        {
+            Parameters = weaponList,
+            Category = "Weapons & Damage"
+        }, //Needs to use a weapons list
+        new Effect("Give Instagib Rifles to All", "give_instagib") { Category = "Weapons & Damage" },
+        new Effect("Give Redeemers to All", "give_redeemer") { Category = "Weapons & Damage" },
+        new Effect("Force Everybody to Use Weapon", "force_weapon_use")
+        {
+            Parameters = weaponList,
+            Category = "Weapons & Damage"
+        }, //Needs to use a weapons list
+        new Effect("Force All Players to use Instagib Rifle", "force_instagib") { Category = "Weapons & Damage" },
+        new Effect("Force All Players to use Redeemers", "force_redeemer") { Category = "Weapons & Damage" },
+        new Effect("Give Ammo", "give_ammo")
+        {
+            Quantity = 10,
+            Parameters = ammoList,
+            Category = "Weapons & Damage"
+        },
+        new Effect("Remove All Ammo", "no_ammo") { Category = "Weapons & Damage" },
+        new Effect("Bonus Damage for All", "bonus_dmg") { Category = "Weapons & Damage" },
+        new Effect("Melee Only! (60 seconds)", "melee_only") { Category = "Weapons & Damage" },
+        new Effect("Bonus Damage for Last Place", "last_place_bonus_dmg") { Category = "Weapons & Damage" },
+        new Effect("All Players Drop Current Weapon", "drop_selected_item") { Category = "Weapons & Damage" }
     };
-
-    //Slider ranges need to be defined
-    public override List<ItemType> ItemTypes => new(new[]
-    {
-        new ItemType("Amount","amount10",ItemType.Subtype.Slider, "{\"min\":1,\"max\":10}"),
-        new ItemType("Amount","amount200",ItemType.Subtype.Slider, "{\"min\":1,\"max\":200}"),
-        new ItemType("Weapons","weaponlist",ItemType.Subtype.ItemList),
-        new ItemType("Ammo","ammolist",ItemType.Subtype.ItemList),
-    });
 }
