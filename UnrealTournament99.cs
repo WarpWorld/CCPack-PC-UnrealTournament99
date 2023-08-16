@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CrowdControl.Common;
 using CrowdControl.Games.Packs;
 using ConnectorType = CrowdControl.Common.ConnectorType;
