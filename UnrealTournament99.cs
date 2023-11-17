@@ -14,7 +14,7 @@ public class UnrealTournament99 : SimpleTCPPack
 
     public UnrealTournament99(UserRecord player, Func<CrowdControlBlock, bool> responseHandler, Action<object> statusUpdateHandler) : base(player, responseHandler, statusUpdateHandler) { }
 
-    public override Game Game { get; } = new(131, "Unreal Tournament 99", "UnrealTournament99", "PC", ConnectorType.SimpleTCPConnector);
+    public override Game Game { get; } = new("Unreal Tournament 99", "UnrealTournament99", "PC", ConnectorType.SimpleTCPConnector);
 
     //Weapon list
     private static readonly ParameterDef weaponList = new("Weapons", "weapons",
