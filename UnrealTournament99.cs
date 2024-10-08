@@ -1,9 +1,10 @@
-﻿using CrowdControl.Common;
+﻿using ConnectorLib.SimpleTCP;
+using CrowdControl.Common;
 using ConnectorType = CrowdControl.Common.ConnectorType;
 
 namespace CrowdControl.Games.Packs.UnrealTournament99;
 
-public class UnrealTournament99 : SimpleTCPPack
+public class UnrealTournament99 : SimpleTCPPack<SimpleTCPServerConnector>
 {
     public override string Host => "0.0.0.0";
 
@@ -13,7 +14,7 @@ public class UnrealTournament99 : SimpleTCPPack
 
     public UnrealTournament99(UserRecord player, Func<CrowdControlBlock, bool> responseHandler, Action<object> statusUpdateHandler) : base(player, responseHandler, statusUpdateHandler) { }
 
-    public override Game Game { get; } = new("Unreal Tournament 99", "UnrealTournament99", "PC", ConnectorType.SimpleTCPConnector);
+    public override Game Game { get; } = new("Unreal Tournament 99", "UnrealTournament99", "PC", ConnectorType.SimpleTCPServerConnector);
 
     //Weapon list
     private static readonly ParameterDef weaponList = new("Weapons", "weapons",
